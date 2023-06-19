@@ -1,36 +1,57 @@
-import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, { useRef, useState } from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import './styles.css';
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from 'swiper';
+
 
 const Carousel = () => {
+    const progressCircle = useRef(null);
+    const progressContent = useRef(null);
+    const onAutoplayTimeLeft = (s, time, progress) => {
+        progressCircle.current.style.setProperty('--progress', 1 - progress);
+        progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+    };
     return (
-        <div className="carousel w-full rounded-3xl">
-            <div id="slide1" className="carousel-item relative w-full">
-                <img src="../../../../../public/Images/slide04.jpg" className="w-full" />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide4" className="btn btn-circle">❮</a>
-                    <a href="#slide2" className="btn btn-circle">❯</a>
+        <div>
+            < Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }
+                }
+                pagination={{
+                    clickable: true,
+                }}
+                navigation={true}
+                modules={[Autoplay, Pagination, Navigation]}
+                onAutoplayTimeLeft={onAutoplayTimeLeft}
+                className="mySwiper"
+            >
+                <SwiperSlide className=' h-80'><img src="../../../../../public/Images/slide 01.jpg" /></SwiperSlide>
+                <SwiperSlide className=' h-80'><img src="../../../../../public/Images/slide02.jpg" /></SwiperSlide>
+                <SwiperSlide className=' h-80'><img src="../../../../../public/Images/slide03.jpg" /></SwiperSlide>
+                <SwiperSlide className=' h-80'><img src="../../../../../public/Images/slide04.jpg" /></SwiperSlide>
+
+                <div className="autoplay-progress" slot="container-end">
+                    <svg viewBox="0 0 48 48" ref={progressCircle}>
+                        <circle cx="24" cy="24" r="20"></circle>
+                    </svg>
+                    <span ref={progressContent}></span>
                 </div>
-            </div>
-            <div id="slide2" className="carousel-item relative w-full">
-                <img src="../../../../../public/Images/slide02.jpg" className="w-full" />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide1" className="btn btn-circle">❮</a>
-                    <a href="#slide3" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide3" className="carousel-item relative w-full">
-                <img src="../../../../../public/Images/slide03.jpg" className="w-full" />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide2" className="btn btn-circle">❮</a>
-                    <a href="#slide4" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide4" className="carousel-item relative w-full">
-                <img src="../../../../../public/Images/slide 01.jpg" className="w-full" />
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide3" className="btn btn-circle">❮</a>
-                    <a href="#slide1" className="btn btn-circle">❯</a>
-                </div>
-            </div>
+            </Swiper>
         </div>
     );
 };

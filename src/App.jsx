@@ -6,7 +6,7 @@ function App() {
 
 
   return (
-    <div >
+    <div className=' max-w-[1440] mx-auto'>
       <RouterProvider router={router} />
 
 
