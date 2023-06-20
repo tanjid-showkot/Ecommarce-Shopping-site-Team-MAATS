@@ -1,15 +1,30 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider';
 
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handlelogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch((error) => { console.log(error.message) })
+
+
+    }
     const menuItems = <React.Fragment>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/shop">Shop</Link></li>
         <li><Link to="/about">About Us</Link></li>
-        <li><Link to="/login">Log In</Link></li>
-    </React.Fragment>;
+        {user?.uid ?
+            <>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><button onClick={handlelogOut}>Sign out</button></li>
+            </>
+
+            : <li><Link to="/login">Log In</Link></li>}
+    </React.Fragment>
     return (
         <div className="navbar rounded-xl bg-base-100">
             <div className="navbar-start">

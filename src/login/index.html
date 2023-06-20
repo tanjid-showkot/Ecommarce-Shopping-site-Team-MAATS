@@ -195,17 +195,29 @@
         <div class="inputGroup inputGroup2">
             <label for="loginPassword" id="loginPasswordLabel">Password</label>
             <input type="password" id="loginPassword" />
+
             <label id="showPasswordToggle" for="showPasswordCheck">Show
                 <input id="showPasswordCheck" type="checkbox" />
                 <div class="indicator"></div>
             </label>
+            <div>
+
+                <a href="#my_modal_7" class="sign text-sm">Forgot your password?</a>
+
+
+            </div>
         </div>
         <div class="inputGroup inputGroup3">
             <button id="login">Log in</button>
         </div>
         <div class="signup">
 
-            <a href="/signup" class="sign" target="_blank">create a new account</a>
+            <div>
+
+                <a href="/signup" class="sign text-sm" target="_blank">create a new account</a>
+
+            </div>
+
         </div>
         <div class="divider">or</div>
         <div class="px-6 sm:px-0 max-w-sm">
@@ -219,6 +231,15 @@
                 </svg>Sign up with Google<div></div></button>
         </div>
     </form>
+    <div class="modal" id="my_modal_7">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Hey!!! </h3>
+            <p class="py-4">just Relax! Think again.</p>
+            <div class="modal-action">
+                <a href="#" class="btn">close</a>
+            </div>
+        </div>
+    </div>
 
 </body>
 <script src="./script.js"></script>

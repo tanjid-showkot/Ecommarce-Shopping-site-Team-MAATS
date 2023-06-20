@@ -1,20 +1,30 @@
-import React, { useContext } from 'react';
-import { useForm } from "react-hook-form"
+import React, { useContext, useState } from 'react';
+import { set, useForm } from "react-hook-form"
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
     const { register, handleSubmit } = useForm()
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [signUpError, setSignUpError] = useState('')
     const onSubmit = (data) => {
-        console.log(data);
+        setSignUpError('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
+                toast("User Created Successfully")
                 console.log(user);
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(error => { console.log(error.message) })
             })
             .catch(error => {
                 console.log(error);
+                setSignUpError(error.message)
             }
             );
 
@@ -38,6 +48,7 @@ const Signup = () => {
                     <label className='text-primary font-bold text-xl'>Password</label>
 
                     <input type='password' className=' w-full mt-5 mb-5 rounded border-2 border-primary h-16' {...register("password")} />
+                    {signUpError && <p className=' text-red-500'>{signUpError}</p>}
 
                     <input className='p-6 w-full btn btn-primary text-center text-white' type="submit" value="Sign Up" />
                     <div className=' text-right hover:text-primary'>
