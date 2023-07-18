@@ -2,6 +2,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const Navbar = () => {
@@ -17,6 +20,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/shop">Shop</Link></li>
         <li><Link to="/about">About Us</Link></li>
+
         {user?.uid ?
             <>
                 <li><Link to="/dashboard">Dashboard</Link></li>
@@ -24,6 +28,12 @@ const Navbar = () => {
             </>
 
             : <li><Link to="/login">Log In</Link></li>}
+        <li><Link to="/cart">
+            <FontAwesomeIcon icon={faCartShopping} size="xl" style={{ color: "#4eb8dd", }} />
+
+        </Link></li>
+
+
     </React.Fragment>
     return (
         <div className="navbar rounded-xl bg-base-100">
@@ -36,7 +46,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost normal-case text-xl">MAATS</Link>
+                <Link to="/" className="btn btn-ghost text-primary normal-case text-xl">MAATS</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

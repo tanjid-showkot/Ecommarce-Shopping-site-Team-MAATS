@@ -31,6 +31,11 @@ var emailLabel = document.querySelector("#loginEmailLabel"),
     hair = document.querySelector(".hair"),
     bodyBG = document.querySelector(".bodyBGnormal"),
     bodyBGchanged = document.querySelector(".bodyBGchanged");
+const executeFunction = () => {
+    window.parent.postMessage('executeFunction', '*');
+}
+
+document.getElementById('google-signin-button').addEventListener('click', executeFunction);
 
 const sendDataToParent = () => {
     const data = {
